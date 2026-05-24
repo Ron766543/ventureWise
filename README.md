@@ -300,10 +300,4 @@ CMD ["node", "src/server.js"]
 
 ---
 
-## 📄 License
-
-MIT License — free to use, modify, and distribute.
-
----
-
 Built with ❤️ to empower grassroots entrepreneurs across India 🇮🇳
