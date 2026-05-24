@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    overscroll-behavior: none;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    overscroll-behavior: none;
+    @apply bg-slate-50 text-slate-800 font-sans;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display;
+  }
+
+  /* kill that annoying blue tap highlight on mobile */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2
+           bg-emerald-600 text-white font-semibold
+           px-5 py-2.5 rounded-xl
+           shadow-sm hover:bg-emerald-700 hover:shadow-md
+           active:scale-[0.97] active:bg-emerald-800
+           transition-all duration-150 select-none cursor-pointer;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2
+           bg-white text-slate-700 font-semibold
+           px-5 py-2.5 rounded-xl border border-slate-200
+           hover:bg-slate-50 hover:border-slate-300 hover:shadow-sm
+           active:scale-[0.97]
+           transition-all duration-150 select-none cursor-pointer;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2
+           border-2 border-emerald-600 text-emerald-700 font-semibold
+           px-5 py-2.5 rounded-xl
+           hover:bg-emerald-600 hover:text-white
+           active:scale-[0.97]
+           transition-all duration-150 select-none cursor-pointer;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2
+           text-slate-600 font-medium px-3 py-2 rounded-lg
+           hover:bg-slate-100 hover:text-slate-900
+           active:scale-[0.97]
+           transition-all duration-150 select-none cursor-pointer;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl border border-slate-100 shadow-sm p-6;
+  }
+
+  /* card with hover - used on clickable cards */
+  .card-interactive {
+    @apply card hover:shadow-md hover:border-slate-200 hover:-translate-y-0.5
+           transition-all duration-200 cursor-pointer;
+  }
+
+  .input {
+    @apply w-full px-4 py-3 rounded-xl border border-slate-200 bg-white
+           text-slate-800 text-sm placeholder:text-slate-400
+           focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent
+           transition duration-150;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold;
+  }
+
+  .section-heading {
+    @apply text-3xl md:text-4xl font-display font-bold text-slate-900 tracking-tight;
+  }
+
+  .label {
+    @apply block text-sm font-semibold text-slate-700 mb-1.5;
+  }
+}
+
+/* ─── Scrollbar ─────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+/* ─── Animations ─────────────────────────────────────── */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slide-down {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.anim-fade    { animation: fade-in   0.4s ease both; }
+.anim-up      { animation: slide-up  0.4s ease both; }
+.anim-down    { animation: slide-down 0.3s ease both; }
+.anim-scale   { animation: scale-in  0.25s ease both; }
+
+/* stagger grid children */
+.stagger > *:nth-child(1) { animation-delay: 0ms; }
+.stagger > *:nth-child(2) { animation-delay: 55ms; }
+.stagger > *:nth-child(3) { animation-delay: 110ms; }
+.stagger > *:nth-child(4) { animation-delay: 165ms; }
+.stagger > *:nth-child(5) { animation-delay: 220ms; }
+.stagger > *:nth-child(6) { animation-delay: 275ms; }
+
+/* ─── Hero background ────────────────────────────────── */
+.hero-bg {
+  background:
+    radial-gradient(ellipse 80% 55% at 50% -5%, #d1fae5 0%, transparent 65%),
+    radial-gradient(ellipse 45% 40% at 95% 85%, #ecfdf5 0%, transparent 55%),
+    #f8fafc;
+}
