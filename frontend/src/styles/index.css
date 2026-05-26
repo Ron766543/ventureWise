@@ -26,7 +26,6 @@
     @apply font-display;
   }
 
-  /* kill that annoying blue tap highlight on mobile */
   * {
     -webkit-tap-highlight-color: transparent;
   }
@@ -72,7 +71,6 @@
     @apply bg-white rounded-2xl border border-slate-100 shadow-sm p-6;
   }
 
-  /* card with hover - used on clickable cards */
   .card-interactive {
     @apply card hover:shadow-md hover:border-slate-200 hover:-translate-y-0.5
            transition-all duration-200 cursor-pointer;
@@ -98,13 +96,12 @@
   }
 }
 
-/* ─── Scrollbar ─────────────────────────────────────── */
 ::-webkit-scrollbar { width: 5px; height: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 99px; }
 ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 
-/* ─── Animations ─────────────────────────────────────── */
+
 @keyframes fade-in {
   from { opacity: 0; }
   to   { opacity: 1; }
@@ -127,7 +124,6 @@
 .anim-down    { animation: slide-down 0.3s ease both; }
 .anim-scale   { animation: scale-in  0.25s ease both; }
 
-/* stagger grid children */
 .stagger > *:nth-child(1) { animation-delay: 0ms; }
 .stagger > *:nth-child(2) { animation-delay: 55ms; }
 .stagger > *:nth-child(3) { animation-delay: 110ms; }
@@ -135,7 +131,6 @@
 .stagger > *:nth-child(5) { animation-delay: 220ms; }
 .stagger > *:nth-child(6) { animation-delay: 275ms; }
 
-/* ─── Hero background ────────────────────────────────── */
 .hero-bg {
   background:
     radial-gradient(ellipse 80% 55% at 50% -5%, #d1fae5 0%, transparent 65%),

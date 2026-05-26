@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { useAuth } from '../context/AuthContext';
 import { LogoIcon } from '../components/shared/Logo';
 
-// small reusable input with icon and optional password toggle
+
 function Field({ label, icon: Icon, type = 'text', ...rest }) {
   const [showPw, setShowPw] = useState(false);
   const isPw = type === 'password';
@@ -36,7 +36,7 @@ function Field({ label, icon: Icon, type = 'text', ...rest }) {
   );
 }
 
-// ─── Login ────────────────────────────────────────────────────────────────────
+// Login 
 export function Login() {
   const { login } = useAuth();
   const navigate  = useNavigate();
@@ -120,7 +120,7 @@ export function Login() {
   );
 }
 
-// ─── Register ─────────────────────────────────────────────────────────────────
+//  Register 
 export function Register() {
   const { register } = useAuth();
   const navigate     = useNavigate();

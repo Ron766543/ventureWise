@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// uses the actual brand asset from /public/logo.png
-// size prop controls the icon dimensions; showText shows the wordmark
+
 
 function Logo({ size = 80, showText = true, className = '' }) {
   return (
@@ -24,7 +23,7 @@ function Logo({ size = 80, showText = true, className = '' }) {
   );
 }
 
-// standalone icon-only version (no Link wrapper) for places like auth page center
+
 export function LogoIcon({ size = 70 }) {
   return (
     <img

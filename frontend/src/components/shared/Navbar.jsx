@@ -21,7 +21,7 @@ export default function Navbar() {
   const [open,     setOpen]     = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // close mobile menu whenever we navigate
+  
   useEffect(() => { setOpen(false); }, [location.pathname]);
 
   useEffect(() => {
@@ -111,7 +111,7 @@ export default function Navbar() {
             )}
           </div>
 
-          {/* mobile burger */}
+         
           <button
             onClick={() => setOpen((v) => !v)}
             className="md:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100 transition-colors"
@@ -122,7 +122,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* mobile drawer */}
+     
       {open && (
         <div className="md:hidden border-t border-slate-100 bg-white px-4 py-3 space-y-1 anim-down">
           {NAV_LINKS.map(({ path, label, Icon }) => (

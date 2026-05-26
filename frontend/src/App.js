@@ -75,7 +75,7 @@ export default function App() {
                 <Route path="/training"      element={<Training />} />
                 <Route path="/become-mentor" element={<BecomeMentor />} />
 
-                {/* protected — any logged-in user */}
+                {/* protect — any logged-in user */}
                 <Route path="/assessment" element={
                   <ProtectedRoute><Assessment /></ProtectedRoute>
                 } />
@@ -83,7 +83,7 @@ export default function App() {
                   <ProtectedRoute><Dashboard /></ProtectedRoute>
                 } />
 
-                {/* protected — admin only */}
+                {/* protect — admin only */}
                 <Route path="/admin" element={
                   <ProtectedRoute requiredRole="admin"><AdminPanel /></ProtectedRoute>
                 } />

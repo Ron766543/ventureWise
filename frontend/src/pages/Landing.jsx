@@ -10,7 +10,7 @@ import { IdeaCard } from '../components/shared/UI';
 import { LogoIcon } from '../components/shared/Logo';
 import { SAMPLE_IDEAS } from '../data/sample';
 
-// pulled out so Landing stays readable
+
 const STATS = [
   { Icon: Lightbulb,    label: 'Business Ideas', value: '200+' },
   { Icon: Users,        label: 'Entrepreneurs',  value: '5,000+' },
@@ -42,14 +42,13 @@ const TRUST = [
 
 export default function Landing() {
   const { isAuthenticated } = useAuth();
-
-  // just first 3 featured ones for the preview section
+  
   const previewIdeas = SAMPLE_IDEAS.filter((i) => i.isFeatured).slice(0, 3);
 
   return (
     <div className="anim-fade">
 
-      {/* ── Hero ─────────────────────────────────────────────── */}
+      {/* Hero */}
       <section className="hero-bg pt-16 pb-24 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
@@ -116,7 +115,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* ── Stats banner ─────────────────────────────────────── */}
+      {/* Stats banner */}
       <section className="bg-emerald-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 stagger">
@@ -133,7 +132,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* ── Who is this for ──────────────────────────────────── */}
+      {/*  Who is this for  */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
@@ -165,7 +164,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* ── Features ─────────────────────────────────────────── */}
+      {/* Features */}
       <section className="py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
@@ -195,7 +194,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* ── Preview ideas ─────────────────────────────────────── */}
+      {/*  Preview ideas  */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-end justify-between mb-12">
@@ -224,7 +223,6 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* ── How it works ─────────────────────────────────────── */}
       <section className="py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
@@ -240,7 +238,7 @@ export default function Landing() {
                 key={step}
                 className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm relative anim-up"
               >
-                {/* big step number in the background */}
+                {/* big step in bg */}
                 <span className="absolute top-4 right-5 text-5xl font-display font-bold text-slate-50 select-none">
                   {step}
                 </span>
@@ -255,7 +253,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* ── Trust signals ─────────────────────────────────────── */}
+      {/* Trust signals  */}
       <section className="py-14 bg-white border-y border-slate-100">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 text-center">
@@ -272,7 +270,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* ── CTA ───────────────────────────────────────────────── */}
+      {/*  CTA  */}
       <section className="py-24 bg-slate-900 relative overflow-hidden">
         {/* subtle background glow */}
         <div

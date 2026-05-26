@@ -5,7 +5,7 @@ import { Loader2, Bookmark, IndianRupee, Clock, Search,
          Wrench, ExternalLink } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
-// ─── difficulty / demand colour maps used across app ─────────────────────────
+
 export const DIFF_COLORS = {
   low:    'bg-emerald-100 text-emerald-700',
   medium: 'bg-amber-100   text-amber-700',
@@ -19,7 +19,7 @@ export const DEMAND_COLORS = {
   'very-high':'bg-emerald-100 text-emerald-700',
 };
 
-// ─── ProtectedRoute ───────────────────────────────────────────────────────────
+
 export function ProtectedRoute({ children, requiredRole }) {
   const { isAuthenticated, user, loading } = useAuth();
 
@@ -32,7 +32,7 @@ export function ProtectedRoute({ children, requiredRole }) {
   return children;
 }
 
-// ─── Spinner ──────────────────────────────────────────────────────────────────
+
 export function Spinner({ text = '' }) {
   return (
     <div className="flex flex-col items-center justify-center gap-3 py-20">
@@ -42,7 +42,7 @@ export function Spinner({ text = '' }) {
   );
 }
 
-// ─── IdeaCard ─────────────────────────────────────────────────────────────────
+
 export function IdeaCard({ idea, savedIds = [], onSave, onClick }) {
   const saved = savedIds.includes(idea._id);
 
@@ -118,7 +118,7 @@ export function IdeaCard({ idea, savedIds = [], onSave, onClick }) {
   );
 }
 
-// ─── EmptyState ───────────────────────────────────────────────────────────────
+
 export function EmptyState({ Icon = Search, title, description, action }) {
   return (
     <div className="text-center py-20 px-4">
@@ -132,7 +132,7 @@ export function EmptyState({ Icon = Search, title, description, action }) {
   );
 }
 
-// ─── StatCard ─────────────────────────────────────────────────────────────────
+
 const STAT_COLORS = {
   primary: 'bg-emerald-50 text-emerald-600',
   yellow:  'bg-amber-50   text-amber-600',
@@ -156,7 +156,7 @@ export function StatCard({ icon: Icon, label, value, color = 'primary' }) {
   );
 }
 
-// ─── ProgressBar ─────────────────────────────────────────────────────────────
+
 const BAR_COLORS = {
   primary: 'bg-emerald-500',
   blue:    'bg-blue-500',
@@ -185,7 +185,6 @@ export function ProgressBar({ pct, label, color = 'primary' }) {
   );
 }
 
-// ─── ResourceCard ─────────────────────────────────────────────────────────────
 const TYPE_ICONS = {
   video: Play, article: FileText, checklist: CheckSquare,
   template: FileCode, guide: BookOpen, tool: Wrench,
