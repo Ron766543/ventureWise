@@ -234,7 +234,7 @@ vercel --prod
 # REACT_APP_API_URL = https://your-backend.onrender.com/api
 ```
 
-### Backend → Render / Railway
+### Backend → Render
 ```bash
 # On Render.com or Railway.app:
 # 1. Connect your GitHub repository
@@ -297,12 +297,6 @@ CMD ["node", "src/server.js"]
 3. Commit changes: `git commit -m 'Add my feature'`
 4. Push: `git push origin feature/my-feature`
 5. Open a Pull Request
-
----
-
-## 📄 License
-
-MIT License — free to use, modify, and distribute.
 
 ---
 
