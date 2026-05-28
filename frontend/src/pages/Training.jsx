@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react'; // 1. Added useCallback
 import { resourcesAPI } from '../utils/api';
 import { SAMPLE_RESOURCES } from '../data/sample';
 import { Spinner, ResourceCard, EmptyState } from '../components/shared/UI';
@@ -25,9 +25,8 @@ const Training = () => {
   const [filters, setFilters] = useState({ type:'', category:'', search:'' });
   const set = (k,v) => setFilters(f => ({...f,[k]:v}));
 
-  useEffect(() => { load(); }, [load]);
-
-  const load = async () => {
+  // 2. Wrapped load in useCallback with [filters] dependency
+  const load = useCallback(async () => {
     setLoading(true);
     try {
       const params = {};
@@ -43,7 +42,12 @@ const Training = () => {
       if (filters.search) f = f.filter(r => r.title.toLowerCase().includes(filters.search.toLowerCase()));
       setResources(f);
     } finally { setLoading(false); }
-  };
+  }, [filters]);
+
+  // 3. Moved useEffect below load and kept [load] dependency
+  useEffect(() => {
+    load();
+  }, [load]);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">

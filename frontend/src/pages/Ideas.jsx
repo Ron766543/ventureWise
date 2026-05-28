@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react'; // 1. Added useCallback
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { ideasAPI } from '../utils/api';
@@ -16,9 +16,8 @@ const Ideas = () => {
   const [savedIds, setSavedIds] = useState(user?.savedIds || []);
   const [showFilters, setShowFilters] = useState(false);
 
-  useEffect(() => { loadIdeas(); }, [loadIdeas]);
-
-  const loadIdeas = async () => {
+  // 2. Wrapped loadIdeas in useCallback with [filters] dependency
+  const loadIdeas = useCallback(async () => {
     setLoading(true);
     try {
       const params = {};
@@ -39,7 +38,12 @@ const Ideas = () => {
       );
       setIdeas(f);
     } finally { setLoading(false); }
-  };
+  }, [filters]);
+
+  // 3. Moved useEffect below loadIdeas and kept [loadIdeas] dependency
+  useEffect(() => {
+    loadIdeas();
+  }, [loadIdeas]);
 
   const handleSave = async (ideaId) => {
     if (!isAuthenticated) { navigate('/login'); return; }
@@ -100,7 +104,7 @@ const Ideas = () => {
             <div>
               <label className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2 block">Suitable For</label>
               <div className="flex gap-2 flex-wrap">
-                {[['women','👩'],['youth','🧑‍🎓'],['rural','🌾']].map(([val, emoji]) => (
+                {[['women','👩'],['youth','🧑🎓'],['rural','🌾']].map(([val, emoji]) => (
                   <button key={val} onClick={() => set('suitableFor', filters.suitableFor === val ? '' : val)}
                     className={`px-3 py-2 rounded-xl text-sm font-medium border-2 transition capitalize ${
                       filters.suitableFor === val ? 'border-emerald-500 bg-emerald-50 text-emerald-700' : 'border-slate-200 text-slate-600 hover:border-slate-300 bg-white'
