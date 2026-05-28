@@ -15,12 +15,17 @@ exports.protect = async (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET || 'fallback_secret');
-    const user = await User.findById(decoded.id).select('-password');
+    
+    // Support both 'id' and '_id' in the token payload
+    const userId = decoded.id || decoded._id;
+    const user = await User.findById(userId).select('-password');
 
     if (!user) {
       return res.status(401).json({ success: false, message: 'User not found' });
     }
-    if (!user.isActive) {
+    
+    // Safe check: Only block if isActive is explicitly set to false
+    if (user.isActive === false) {
       return res.status(401).json({ success: false, message: 'Account has been deactivated' });
     }
 
@@ -34,10 +39,11 @@ exports.protect = async (req, res, next) => {
 // Role-based access control
 exports.authorize = (...roles) => {
   return (req, res, next) => {
-    if (!roles.includes(req.user.role)) {
+    // Prevent server crash if 'protect' middleware was forgotten in the route chain
+    if (!req.user || !roles.includes(req.user.role)) {
       return res.status(403).json({
         success: false,
-        message: `Role '${req.user.role}' is not authorized to access this route`
+        message: `Role '${req.user ? req.user.role : 'guest'}' is not authorized to access this route`
       });
     }
     next();
@@ -54,7 +60,13 @@ exports.optionalAuth = async (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET || 'fallback_secret');
-    req.user = await User.findById(decoded.id).select('-password');
+    const userId = decoded.id || decoded._id;
+    const user = await User.findById(userId).select('-password');
+    
+    // Only attach if user is active
+    if (user && user.isActive !== false) {
+      req.user = user;
+    }
   } catch (_) { /* ignore */ }
   next();
 };

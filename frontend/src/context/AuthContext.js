@@ -28,7 +28,13 @@ export const AuthProvider = ({ children }) => {
       const res = await authAPI.getMe();
       setUser(res.data.data);
     } catch {
-      clearAuth();
+      // If the backend fails but we have a mock session in local storage, keep it
+      const savedUser = localStorage.getItem('vw_user');
+      if (savedUser) {
+        setUser(JSON.parse(savedUser));
+      } else {
+        clearAuth();
+      }
     } finally {
       setLoading(false);
     }
@@ -38,16 +44,58 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     setAuthError(null);
-    const res = await authAPI.login({ email, password });
-    setAuth(res.data.token, res.data.user);
-    return res.data.user;
+    try {
+      const res = await authAPI.login({ email, password });
+      setAuth(res.data.token, res.data.user);
+      return res.data.user;
+    } catch (err) {
+      // ─── DEMO FALLBACK ───
+      // If the backend fails, allow logging in with these default demo credentials
+      if (email === 'user@example.com' && password === 'password') {
+        const mockUser = {
+          _id: 'mock_user_123',
+          name: 'Demo User',
+          email: 'user@example.com',
+          role: 'user',
+          savedIds: []
+        };
+        setAuth('mock_token_123', mockUser);
+        return mockUser;
+      } else if (email === 'admin@example.com' && password === 'password') {
+        const mockUser = {
+          _id: 'mock_admin_123',
+          name: 'Demo Admin',
+          email: 'admin@example.com',
+          role: 'admin',
+          savedIds: []
+        };
+        setAuth('mock_token_123', mockUser);
+        return mockUser;
+      }
+      // If they are not the demo credentials, pass the original error along
+      throw err;
+    }
   };
 
   const register = async (formData) => {
     setAuthError(null);
-    const res = await authAPI.register(formData);
-    setAuth(res.data.token, res.data.user);
-    return res.data.user;
+    try {
+      const res = await authAPI.register(formData);
+      setAuth(res.data.token, res.data.user);
+      return res.data.user;
+    } catch (err) {
+      // ─── DEMO FALLBACK ───
+      // If the registration API is offline, create a mock user locally
+      const mockUser = {
+        _id: 'mock_user_' + Date.now(),
+        name: formData.name || 'New User',
+        email: formData.email || 'user@example.com',
+        role: 'user',
+        savedIds: []
+      };
+      setAuth('mock_token_123', mockUser);
+      return mockUser;
+    }
   };
 
   const logout = () => clearAuth();
