@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
   Search, Star, Users, Clock, BadgeCheck, Languages,
-  MessageCircle, X, GraduationCap, ChevronDown, Send
+  MessageCircle, X, GraduationCap, Send
 } from 'lucide-react';
 
 const MentorCard = ({ mentor, onContact }) => {

@@ -7,7 +7,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { IdeaCard } from '../components/shared/UI';
-import { LogoIcon } from '../components/shared/Logo';
+
 import { SAMPLE_IDEAS } from '../data/sample';
 
 

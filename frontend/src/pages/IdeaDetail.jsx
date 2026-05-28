@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect} from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ideasAPI, roadmapAPI, progressAPI } from '../utils/api';
 import { SAMPLE_IDEAS } from '../data/sample';
@@ -6,10 +6,10 @@ import { Spinner } from '../components/shared/UI';
 import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-toastify';
 import {
-  ArrowLeft, Target, GraduationCap, BarChart2, Clock,
+  ArrowLeft, Target, GraduationCap, Clock,
   IndianRupee, Eye, Bookmark, CheckCircle2, Wrench,
   Scale, Megaphone, Map, TrendingUp, Flame, Zap, Info,
-  ChevronRight, Loader2, ExternalLink
+  Loader2
 } from 'lucide-react';
 
 const TABS = [
