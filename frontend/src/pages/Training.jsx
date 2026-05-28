@@ -25,7 +25,7 @@ const Training = () => {
   const [filters, setFilters] = useState({ type:'', category:'', search:'' });
   const set = (k,v) => setFilters(f => ({...f,[k]:v}));
 
-  useEffect(() => { load(); }, [filters]);
+  useEffect(() => { load(); }, [load]);
 
   const load = async () => {
     setLoading(true);

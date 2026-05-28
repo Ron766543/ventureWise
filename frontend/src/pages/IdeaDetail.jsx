@@ -33,7 +33,7 @@ const IdeaDetail = () => {
   const [loading, setLoading] = useState(true);
   const [tracking, setTracking] = useState(false);
 
-  useEffect(() => { loadData(); }, [id]);
+  useEffect(() => { loadData(); }, [loadData]);
 
   const loadData = async () => {
     setLoading(true);

@@ -16,7 +16,7 @@ const Ideas = () => {
   const [savedIds, setSavedIds] = useState(user?.savedIds || []);
   const [showFilters, setShowFilters] = useState(false);
 
-  useEffect(() => { loadIdeas(); }, [filters]);
+  useEffect(() => { loadIdeas(); }, [loadIdeas]);
 
   const loadIdeas = async () => {
     setLoading(true);
