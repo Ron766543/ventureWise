@@ -22,6 +22,9 @@ const assessmentRoutes = require('./routes/assessments');
 
 const app = express();
 
+// ✅ Fix: trust proxy for Render
+app.set('trust proxy', 1);
+
 // Connect to DB
 connectDB();
 
@@ -49,7 +52,7 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
-// Static files (uploaded resources)
+// Static files
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
 // Health check
@@ -57,7 +60,7 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString(), env: process.env.NODE_ENV });
 });
 
-// API Routes
+// ✅ API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/ideas', ideaRoutes);

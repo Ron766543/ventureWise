@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+// ✅ Include /api in the base URL
+const API_BASE = process.env.REACT_APP_API_URL || 'https://venturewise-xtw2.onrender.com/api';
 
 const api = axios.create({
   baseURL: API_BASE,
@@ -28,7 +29,7 @@ api.interceptors.response.use(
   }
 );
 
-//  Auth 
+// ─── Auth ───────────────────────────────────────────────────────────────────
 export const authAPI = {
   register: (data) => api.post('/auth/register', data),
   login: (data) => api.post('/auth/login', data),
@@ -37,13 +38,13 @@ export const authAPI = {
   changePassword: (data) => api.put('/auth/change-password', data)
 };
 
-//  Assessments 
+// ─── Assessments ─────────────────────────────────────────────────────────────
 export const assessmentAPI = {
   save: (data) => api.post('/assessments', data),
   get: () => api.get('/assessments')
 };
 
-//  Business Ideas 
+// ─── Business Ideas ──────────────────────────────────────────────────────────
 export const ideasAPI = {
   getAll: (params) => api.get('/ideas', { params }),
   getRecommended: () => api.get('/ideas/recommended'),
@@ -54,21 +55,21 @@ export const ideasAPI = {
   delete: (id) => api.delete(`/ideas/${id}`)
 };
 
-//  Roadmaps 
+// ─── Roadmaps ────────────────────────────────────────────────────────────────
 export const roadmapAPI = {
   getById: (id) => api.get(`/roadmaps/${id}`),
   create: (data) => api.post('/roadmaps', data),
   update: (id, data) => api.put(`/roadmaps/${id}`, data)
 };
 
-//  Resources 
+// ─── Resources ───────────────────────────────────────────────────────────────
 export const resourcesAPI = {
   getAll: (params) => api.get('/resources', { params }),
   create: (data) => api.post('/resources', data),
   approve: (id) => api.put(`/resources/${id}/approve`)
 };
 
-//  Mentors 
+// ─── Mentors ─────────────────────────────────────────────────────────────────
 export const mentorsAPI = {
   getAll: (params) => api.get('/mentors', { params }),
   getById: (id) => api.get(`/mentors/${id}`),
@@ -78,14 +79,14 @@ export const mentorsAPI = {
   answerQuestion: (sessionId, answer) => api.put(`/mentors/qa/${sessionId}/answer`, { answer })
 };
 
-//  Progress 
+// ─── Progress ────────────────────────────────────────────────────────────────
 export const progressAPI = {
   getAll: () => api.get('/progress'),
   create: (data) => api.post('/progress', data),
   update: (id, data) => api.put(`/progress/${id}`, data)
 };
 
-//  Admin 
+// ─── Admin ───────────────────────────────────────────────────────────────────
 export const adminAPI = {
   getStats: () => api.get('/admin/stats'),
   getUsers: (params) => api.get('/admin/users', { params }),

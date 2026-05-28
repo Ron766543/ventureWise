@@ -22,8 +22,6 @@ const sendTokenResponse = (user, statusCode, res) => {
 };
 
 // @route   POST /api/auth/register
-// @desc    Register a new user
-// @access  Public
 router.post('/register', [
   body('name').trim().notEmpty().withMessage('Name is required'),
   body('email').isEmail().withMessage('Valid email is required'),
@@ -57,8 +55,6 @@ router.post('/register', [
 });
 
 // @route   POST /api/auth/login
-// @desc    Login user
-// @access  Public
 router.post('/login', [
   body('email').isEmail().withMessage('Valid email is required'),
   body('password').notEmpty().withMessage('Password is required')
@@ -95,8 +91,6 @@ router.post('/login', [
 });
 
 // @route   GET /api/auth/me
-// @desc    Get current user
-// @access  Private
 router.get('/me', protect, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).populate('savedIdeas', 'title category icon');
@@ -107,8 +101,6 @@ router.get('/me', protect, async (req, res) => {
 });
 
 // @route   PUT /api/auth/profile
-// @desc    Update profile
-// @access  Private
 router.put('/profile', protect, async (req, res) => {
   try {
     const allowedFields = ['name', 'phone', 'location', 'bio', 'avatar', 'experience', 'education'];
@@ -125,7 +117,6 @@ router.put('/profile', protect, async (req, res) => {
 });
 
 // @route   PUT /api/auth/change-password
-// @access  Private
 router.put('/change-password', protect, [
   body('currentPassword').notEmpty(),
   body('newPassword').isLength({ min: 6 })
