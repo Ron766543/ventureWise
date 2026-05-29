@@ -49,11 +49,12 @@ export function Login() {
     e.preventDefault();
     setLoading(true);
     try {
-      const user = await login(email, password);
+      const user = await login(email.trim(), password);
       toast.success(`Welcome back, ${user.name.split(' ')[0]}!`);
       navigate(user.role === 'admin' ? '/admin' : '/dashboard');
     } catch (err) {
-      toast.error(err.response?.data?.message ?? 'Invalid credentials');
+      const message = err?.response?.data?.message || err?.message || 'Invalid credentials';
+      toast.error(message);
     } finally {
       setLoading(false);
     }

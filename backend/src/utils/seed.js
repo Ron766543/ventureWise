@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
 require('dotenv').config();
 
 const User = require('../models/User');
@@ -8,6 +7,8 @@ const Roadmap = require('../models/Roadmap');
 const { Mentor, Resource } = require('../models/index');
 
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/venturewise';
+
+const normalizeEmail = (email) => String(email || '').trim().toLowerCase();
 
 const sampleIdeas = [
   {
@@ -200,7 +201,7 @@ async function seed() {
     // Create admin user
     const admin = await User.create({
       name: 'VentureWise Admin',
-      email: 'admin@venturewise.in',
+      email: normalizeEmail('admin@venturewise.in'),
       password: 'Admin@123',
       role: 'admin',
       isActive: true,
@@ -210,7 +211,7 @@ async function seed() {
     // Create sample mentor user
     const mentorUser = await User.create({
       name: 'Priya Sharma',
-      email: 'priya.mentor@venturewise.in',
+      email: normalizeEmail('priya.mentor@venturewise.in'),
       password: 'Mentor@123',
       role: 'mentor',
       bio: 'Serial entrepreneur with 12 years of experience in rural business development and women empowerment.',
@@ -222,7 +223,7 @@ async function seed() {
     // Create sample regular user
     await User.create({
       name: 'Sunita Devi',
-      email: 'sunita@example.com',
+      email: normalizeEmail('sunita@example.com'),
       password: 'User@123',
       role: 'user',
       location: 'Patna, Bihar',
