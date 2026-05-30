@@ -31,8 +31,20 @@ connectDB();
 // Security middleware
 app.use(helmet());
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:3000',
-  credentials: true
+  origin: function (origin, callback) {
+    const allowed = [
+      process.env.CLIENT_URL,
+      'http://localhost:3000',
+    ].filter(Boolean).map(u => u.replace(/\/$/, '')); // strip trailing slashes
+
+    const normalised = (origin || '').replace(/\/$/, '');
+    if (!origin || allowed.includes(normalised)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
 }));
 
 // Rate limiting
